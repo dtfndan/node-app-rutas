@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-drop:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
 
     steps:
       - name: prueba up
