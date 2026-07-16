@@ -1,0 +1,33 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+on:
+  push:
+    branches:  
+     -main
+
+jobs:
+  build-and-drop:
+    runs-on: ubunto-lastest
+
+    steps:
+      - name: prueba up
+      uses: actions/checkout@v4
+      with:
+        node-version: '20'
+        cache: npm
+
+        name: instalar depencias
+        run: npm-ci
+
+        name: compilar la prueba
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-empaquetada
+          path: .dist
+          retention-days: 5
+    
+
+  
