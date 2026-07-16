@@ -6,27 +6,33 @@ name: Node.js Package
 on:
   push:
     branches:  
-     -main
+     - main
 
 jobs:
   build-and-drop:
-    runs-on: ubunto-lastest
+    runs-on: ubuntu-lastest
 
     steps:
       - name: prueba up
-      uses: actions/checkout@v4
-      with:
-        node-version: '20'
-        cache: npm
+        uses: actions/checkout@v4
 
-        name: instalar depencias
-        run: npm-ci
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-        name: compilar la prueba
+      - name: instalar dependencias
+        run: npm ci  
+
+      - name: compilar la prueba
+        run: npm run build
+
+      - name: Guardar en Drop
         uses: actions/upload-artifact@v4
         with:
           name: app-empaquetada
-          path: .dist
+          path: dist 
           retention-days: 5
     
 
